@@ -39,6 +39,15 @@ body {
     bottom: 10px;
     height:30px;
 }
+#pause{
+	position: fixed;
+    text-align: center;
+    border: 1px solid #000;
+    background-color: #00ddff;
+    left: 100px;
+    bottom: 10px;
+    height:30px;
+}
 
 
 

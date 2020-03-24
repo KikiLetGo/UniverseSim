@@ -50,6 +50,7 @@
 		var world
 		var orbitcontrols
 		var simData=''
+		var mainScene
 		// window.onload = function(){
 			
 		
@@ -83,6 +84,7 @@
 			try{
 				world = new World()
 				world.start(function(scene){
+					mainScene = scene
 					createUIControls(scene)
 					action()
 
@@ -90,9 +92,17 @@
 			}catch(e){
 				alert('数据非法:'+e)
 
+			}	
+		}
+		function pause(){
+			world.runing=!world.runing
+			if(world.runing){
+				mainScene.scene.simulate( undefined, 1);
+				$('#pause').text("暂停")
+
+			}else{
+				$('#pause').text("继续")
 			}
-			
-			
 		}
 		window.addEventListener( 'resize', onWindowResize, false );
 
@@ -141,7 +151,7 @@
 	<button id="fullScreen" onclick="fullScreen()">全屏</button>
 	<button id="edit" data-toggle="modal" data-target="#myModal">编辑</button>
 	<button id="start" onclick="start()">开始模拟</button>
-
+	<button id="pause" onclick="pause()">暂停</button>
 	<script type="text/javascript">
 		// addControlPane()
 		

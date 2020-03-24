@@ -2,6 +2,7 @@ function World(){
 	this.objects=[]
 	this.scene = new MainScene()
 	this.worldTime = 0
+	this.runing = true
 }
 World.prototype.addObject = function(object) {
 	this.objects.push(object)

@@ -33,6 +33,7 @@ function MainScene(){
 	this.createLights()
 	this.createBackground()
 	this.scene.simulate();
+	this.render(this.render,this.renderer,this.render_stats,this.scene,this.camera)
 
 }
 MainScene.prototype.createCamera = function(){
@@ -94,10 +95,13 @@ MainScene.prototype.createBackground = function(){
 
 
 
-MainScene.prototype.render = function() {
-	//requestAnimationFrame( this.render );
-	this.renderer.render( this.scene, this.camera );
-	this.render_stats.update();
+MainScene.prototype.render = function(fun,renderer,render_stats,scene,camera) {
+	renderer.render( scene, camera );
+	render_stats.update();
+	requestAnimationFrame( function(){
+		fun(fun,renderer,render_stats,scene,camera)
+	} );
+
 };
 
 MainScene.prototype.addObject = function(object){
@@ -128,7 +132,10 @@ MainScene.prototype.onWindowResize = function(){
 }
 
 MainScene.prototype.onUpdate = function(){
-	this.render()
+	//this.render()
+	if(!world.runing){
+		return
+	}
 	for (var i=0;i<world.objects.length;i++){
 		if(world.objects[i].update != undefined){
 			world.objects[i].update()
