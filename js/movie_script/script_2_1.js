@@ -3,5 +3,5 @@ function action(){
 
 }
 function getSimDataName(){
-	return "2_1.json"
+	return "2_4.json"
 }
