@@ -1,0 +1,19 @@
+{
+	"bodies":[
+		{
+			"type":"earth",
+			"raduis":6,
+			"mass":1,
+			"pos":{
+				"x":0,
+				"y":0,
+				"z":-300
+			},
+			"initVelocity":{
+				"x":0,
+				"y":0,
+				"z":-10
+			}
+		}
+	]
+}

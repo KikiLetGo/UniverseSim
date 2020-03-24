@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>三体演化模拟</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+
+	
+	<script type="text/javascript" src="libs/jquery-1.12.4.min.js"></script>
+
+	<script type="text/javascript" src="libs/three.min.js"></script>
+	<script type="text/javascript" src="libs/stats.js"></script>
+	<script type="text/javascript" src="libs/physi.js"></script>
+	<script type="text/javascript" src="libs/tween.js"></script>
+	<script type="text/javascript" src="libs/dat.gui.js"></script>
+	<script type="text/javascript" src="libs/bootstrap.min.js"></script>
+
+
+
+	<script type="text/javascript" src="js/utils/CommonUtils.js"></script>
+
+	<script type="text/javascript" src="./jsm/OrbitControls.js"></script>
+	<script type="text/javascript" src="js/config/BodyConfig.js"></script>
+
+	<script type="text/javascript" src="js/Body.js"></script>
+	<script type="text/javascript" src="js/scenes/MainScene.js"></script>
+	<script type="text/javascript" src="js/Factory.js"></script>
+	<script type="text/javascript" src="js/World.js"></script>
+	<script type="text/javascript" src="js/utils/MathUtils.js"></script>
+
+	<script type="text/javascript" src="js/DataLoader.js"></script>
+	<script type="text/javascript" src="js/movie_script/script_2_1.js"></script>
+
+
+
+
+	
+
+	<script type="text/javascript">
+		Physijs.scripts.worker = './libs/physijs_worker.js';
+		Physijs.scripts.ammo = './ammo.js';
+
+		
+
+		var world
+		var orbitcontrols
+		var simData=''
+		// window.onload = function(){
+			
+		
+
+		// }
+		function onWindowResize() {
+			world.scene.onWindowResize()
+			
+		}
+		function createUIControls(scene){
+			orbitcontrols = new THREE.OrbitControls(scene.camera,scene.renderer.domElement);
+			orbitcontrols.target = new THREE.Vector3(0, 0, 0);
+			orbitcontrols.autoRotate = false;
+			clock = new THREE.Clock();
+		}
+		var simDataName = getSimDataName()
+		var dataLoader = new DataLoader()
+		dataLoader.loadSimData(simDataName,function(data){
+
+			simData = JSON.stringify(data, null, "\t")
+			$("#simData").val(simData)
+
+			
+
+		})
+		function start(){
+			if(simData == undefined){
+				alert('数据非法')
+				return
+			}
+			try{
+				world = new World()
+				world.start(function(scene){
+					createUIControls(scene)
+					action()
+
+				},JSON.parse(simData))
+			}catch(e){
+				alert('数据非法:'+e)
+
+			}
+			
+			
+		}
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		//全屏
+		function fullScreen(){
+		    var el = document.documentElement;
+		    var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;
+
+		    //typeof rfs != "undefined" && rfs
+		    if (rfs) {
+		        rfs.call(el);
+		    }
+		    else if (typeof window.ActiveXObject !== "undefined") {
+		        //for IE，这里其实就是模拟了按下键盘的F11，使浏览器全屏
+		        var wscript = new ActiveXObject("WScript.Shell");
+		        if (wscript != null) {
+		            wscript.SendKeys("{F11}");
+		        }
+		    }
+		}
+		function saveData(){
+			try{
+				if(JSON.parse($("#simData").val())==undefined){
+					alert('数据非法')
+					return
+				}
+				simData = $("#simData").val()
+
+			}catch (e){
+				alert('数据非法')
+			}
+			
+
+		}
+
+	</script>
+</head>
+
+<body style="background-color: #000">
+	<!-- <div id="heading">
+
+
+	</div> -->
+	<p style="color: #00ddff" id="timezone">00:00:00</p>
+
+	<button id="fullScreen" onclick="fullScreen()">全屏</button>
+	<button id="edit" data-toggle="modal" data-target="#myModal">编辑</button>
+	<button id="start" onclick="start()">开始模拟</button>
+
+	<script type="text/javascript">
+		// addControlPane()
+		
+	</script>
+
+	<div id="viewport"></div>
+
+
+	<!-- Modal -->
+	<div  class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div style="background-color: #33000000" class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 style="color: #00ddff" class="modal-title" id="myModalLabel">编辑参数</h4>
+	      </div>
+	      <div class="modal-body" style="background-color: #33333333">
+	        <textarea id="simData" style="background-color: #33333333" class="form-control" rows="20"></textarea>
+	      </div>
+	      <div class="modal-footer">
+	        <button style="color: #00ddff;background-color: #ffffff" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	        <button onclick="saveData()" style="background-color: #00ddff" type="button" class="btn btn-primary" data-dismiss="modal">保存参数</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</body>
+
+</html>
