@@ -21,3 +21,6 @@ function action(){
 function getSimDataName(){
 	return "only_3body.json"
 }
+function updateScript(){
+	
+}

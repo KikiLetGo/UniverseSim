@@ -11,7 +11,9 @@ function createSun(bodyConfig,scene){
 }
 
 function createEarth(bodyConfig,scene){
-	bodyConfig.texture = './images/earthTexture.jpeg'
+	if(bodyConfig.texture==undefined){
+		bodyConfig.texture = './images/earthTexture.jpeg'
+	}
 	bodyConfig.tailColor = 0x00ffff
 
 	var earth = new Body(bodyConfig,scene)

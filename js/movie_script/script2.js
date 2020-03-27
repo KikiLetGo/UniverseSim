@@ -44,3 +44,6 @@ function action(){
 function getSimDataName(){
 	return "3_1.json"
 }
+function updateScript(){
+	
+}

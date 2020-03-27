@@ -139,10 +139,14 @@ MainScene.prototype.onUpdate = function(){
 	for (var i=0;i<world.objects.length;i++){
 		if(world.objects[i].update != undefined){
 			world.objects[i].update()
-
 		}
 	}
 	world.worldTime++
 	$('#timezone').text(getTimeWithNum(world.worldTime))
+	updateScript()
+	
+	console.log(this.camera.position)
+	console.log(this.camera.rotation)
+
 	this.scene.simulate( undefined, 1 );
 }

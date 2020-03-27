@@ -27,16 +27,19 @@ function Body(config,scene){
 	this.body.raduis = config.raduis;
 	var that  = this
 	this.body.addEventListener( 'collision', function( other_object, relative_velocity, relative_rotation, contact_normal ) {
-		console.log("body collision!!")	
-		console.log(other_object.obj_type)
+		if(world.noBlast){
+			return
+		}
 
-		if(that.body.obj_type=='earth'){
+		if(that.config.type=='earth'){
+
 			that.blast()
 			that.clean()
 
 			that.scene.removeObject(that)
 		}
-		if(that.body.obj_type=='sun' && other_object.obj_type=='sun'){
+		if(that.config.type=='sun' && other_object.obj_type=='sun'){
+
 			that.blast()
 			that.clean()
 			that.scene.removeObject(that)
@@ -58,7 +61,7 @@ Body.prototype.gravityForce = function(objects,debug=false){
 			var distance = this.body.position.distanceTo(object.body.position);
 			//万有引力公式
 			var oneForce = object.body.position.clone().sub(this.body.position).normalize()
-						.multiplyScalar( 66725.9 )
+						.multiplyScalar( world.G)
 						.multiplyScalar( object.body.mass )
 						.multiplyScalar( this.body.mass )
 						.divideScalar(Math.pow(distance,2));
@@ -94,7 +97,7 @@ Body.prototype.showTail = function(){
 		var star = this.body.position.clone()
 				   .add(new THREE.Vector3(Math.random(),
 				   	Math.random(),
-				   	Math.random()).multiplyScalar(bodySize-bodySize/2).multiplyScalar(0.1))
+				   	Math.random()).multiplyScalar(bodySize-bodySize/2).multiplyScalar(0.5))
 
    		starsGeometry.vertices.push( star );
 	}
@@ -163,7 +166,10 @@ Body.prototype.clean = function(){
 }
 
 Body.prototype.update = function(){
-	this.gravityForce(world.objects)
+	if(!world.noGravity){
+		this.gravityForce(world.objects)
+
+	}
 	this.showTail()
 }
 

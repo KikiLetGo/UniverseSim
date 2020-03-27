@@ -77,3 +77,6 @@ function action(){
 function getSimDataName(){
 	return "lonely_earth.json"
 }
+function updateScript(){
+	
+}

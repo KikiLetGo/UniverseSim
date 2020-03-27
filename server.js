@@ -52,15 +52,15 @@ function processRequest (request, response) {
     var pathName = decodeURI(pathName);
 
     //解决301重定向问题，如果pathname没以/结尾，并且没有扩展名
-    if (!pathName.endsWith('/') && path.extname(pathName) === '') {
-        pathName += '/';
-        var redirect = "http://" + request.headers.host + pathName;
-        response.writeHead(301, {
-            location: redirect
-        });
-        //response.end方法用来回应完成后关闭本次对话，也可以写入HTTP回应的具体内容。
-        response.end();
-    }
+    // if (!pathName.endsWith('/') && path.extname(pathName) === '') {
+    //     pathName += '/';
+    //     var redirect = "http://" + request.headers.host + pathName;
+    //     response.writeHead(301, {
+    //         location: redirect
+    //     });
+    //     //response.end方法用来回应完成后关闭本次对话，也可以写入HTTP回应的具体内容。
+    //     response.end();
+    // }
 
     //获取资源文件的绝对路径
     var filePath = path.resolve(__dirname + pathName);
