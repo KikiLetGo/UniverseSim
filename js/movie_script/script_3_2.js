@@ -3,6 +3,7 @@ function follow(target){
 	world.scene.camera.lookAt(target.position)
 
 	requestAnimationFrame(function(){
+
 		var targetPos = target.position.clone()
 		var moveStepVec = targetPos.sub(world.scene.camera.position).normalize().multiplyScalar(1)
 		world.scene.camera.position.set( 
@@ -12,7 +13,9 @@ function follow(target){
 		world.scene.camera.updateProjectionMatrix();
 
 		orbitcontrols.update()
-		follow(target)
+		if(world.worldTime<6100){
+			follow(target)
+		}
 	});
 	
 }
@@ -104,6 +107,12 @@ function updateScript(){
 
 			}
 		})
+
+	}
+	else if(world.worldTime==6120){
+		var targetPos = new THREE.Vector3(100000,0,0)
+
+		step1()
 
 	}
 }
