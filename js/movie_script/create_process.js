@@ -83,6 +83,39 @@ function action(){
 function getSimDataName(){
 	return "create_process.json"
 }
+function step(targetPos,speed){
+
+	requestAnimationFrame(function(){
+		var moveStepVec = targetPos.clone().sub(world.scene.camera.position).normalize().multiplyScalar(1)
+		world.scene.camera.position.set( 
+			world.scene.camera.position.x+moveStepVec.x,
+		 world.scene.camera.position.y+moveStepVec.y,
+		  world.scene.camera.position.z+moveStepVec.z);
+
+		world.scene.camera.updateProjectionMatrix();
+
+		orbitcontrols.update()
+		
+		if(world.scene.camera.position.distanceTo(targetPos)>5){
+			step(targetPos)
+
+		}
+	});
+}
 function updateScript(){
+	if(world.worldTime==600){
+		var targetPos = new THREE.Vector3(-160.72099380041456,15.446825647237672,-14.22057412562574)
+	 	//orbitcontrols.target = world.objects[1].body.position
+	 	step(world.objects[1].body.position.clone().add(new THREE.Vector3(50,0,50)),1)
+
+	}
+	if(world.worldTime==1000){
+	 	//orbitcontrols.target = world.objects[0].body.position
+	 	
+
+		var targetPos = new THREE.Vector3(-92.06335676214047,273.99516986558245,-83.17108186521611)
+	 	step(targetPos,1)
+
+	}
 	
 }

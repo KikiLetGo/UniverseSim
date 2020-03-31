@@ -13,9 +13,7 @@ function follow(target){
 		world.scene.camera.updateProjectionMatrix();
 
 		orbitcontrols.update()
-		if(world.worldTime<6100){
-			follow(target)
-		}
+		follow(target)
 	});
 	
 }
@@ -109,12 +107,12 @@ function updateScript(){
 		})
 
 	}
-	else if(world.worldTime==6120){
-		var targetPos = new THREE.Vector3(100000,0,0)
+	// else if(world.worldTime==6120){
+	// 	var targetPos = new THREE.Vector3(100000,0,0)
 
-		step1()
+	// 	step1()
 
-	}
+	// }
 }
 
 function getSimDataName(){

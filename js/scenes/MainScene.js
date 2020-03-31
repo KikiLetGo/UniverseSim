@@ -3,6 +3,7 @@ function MainScene(){
 	this.renderer.setSize( window.innerWidth, window.innerHeight );
 	this.renderer.shadowMap.enabled = true;
 	this.renderer.shadowMapSoft = true;
+	this.renderer.shadowMapType=THREE.PCFSoftShadowMap;
 	document.getElementById( 'viewport' ).appendChild( this.renderer.domElement );
 	
 	this.render_stats = new Stats();
@@ -146,7 +147,6 @@ MainScene.prototype.onUpdate = function(){
 	updateScript()
 	
 	console.log(this.camera.position)
-	console.log(this.camera.rotation)
 
 	this.scene.simulate( undefined, 1 );
 }

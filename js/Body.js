@@ -11,7 +11,7 @@ function Body(config,scene){
 	);
 	this.material.map.wrapS = THREE.RepeatWrapping;
 	this.material.map.repeat.set( 1.0, 1.0 );
-	this.geometry = new THREE.SphereGeometry( config.raduis ,30,30 );
+	this.geometry = new THREE.SphereGeometry( config.raduis ,50,50 );
     this.body = new Physijs.SphereMesh(
 		this.geometry,
 		this.material,
@@ -48,6 +48,8 @@ function Body(config,scene){
 	});
 	this.body.name=name
 	this.tails=[]
+	this.tailSize = 1
+	this.tailCounts=100
 
 	
 
@@ -93,7 +95,7 @@ Body.prototype.showTail = function(){
 
 
 	var bodySize = this.config.raduis
-	for(var i=0;i<100;i++){
+	for(var i=0;i<this.tailCounts;i++){
 		var star = this.body.position.clone()
 				   .add(new THREE.Vector3(Math.random(),
 				   	Math.random(),
@@ -104,7 +106,7 @@ Body.prototype.showTail = function(){
 	
 
 
-	var starsMaterial = new THREE.PointsMaterial( { color: this.config.tailColor,size:1 } );
+	var starsMaterial = new THREE.PointsMaterial( { color: this.config.tailColor,size:this.tailSize } );
 
 	var starField = new THREE.Points( starsGeometry, starsMaterial );
 

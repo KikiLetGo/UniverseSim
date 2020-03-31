@@ -32,11 +32,5 @@ function updateScript(){
 	 	step(targetPos)
 
 	}
-	if(world.worldTime==480){
-		//var targetPos = new THREE.Vector3(1464.3065963525944,2243.2793344709926,-107.32350829269947)
-		var targetPos = new THREE.Vector3(1467.0623486772583,830.3636714562806,1838.993543340518)
-
-	 	step(targetPos)
-
-	}
+	
 }

@@ -3,7 +3,7 @@ function action(){
 
 }
 function getSimDataName(){
-	return "2_1.json"
+	return "1_2.json"
 }
 
 function step(targetPos){
@@ -25,18 +25,12 @@ function step(targetPos){
 	});
 }
 function updateScript(){
-	if(world.worldTime==10){
+	if(world.worldTime==260){
 		//var targetPos = new THREE.Vector3(1464.3065963525944,2243.2793344709926,-107.32350829269947)
-		var targetPos = new THREE.Vector3(1216.385884888901,1180.8008685823597,2417.8661607024956)
+		var targetPos = new THREE.Vector3(-787.7956871247471,-203.94457133043068,-1053.2618038722103)
 
 	 	step(targetPos)
 
 	}
-	if(world.worldTime==480){
-		//var targetPos = new THREE.Vector3(1464.3065963525944,2243.2793344709926,-107.32350829269947)
-		var targetPos = new THREE.Vector3(1467.0623486772583,830.3636714562806,1838.993543340518)
-
-	 	step(targetPos)
-
-	}
+	
 }

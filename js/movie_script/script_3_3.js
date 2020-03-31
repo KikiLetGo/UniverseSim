@@ -78,7 +78,7 @@ function action(){
 }
 function updateScript(){
 	console.log('world.worldTime:'+world.worldTime)
-	if(world.worldTime==240){
+	if(world.worldTime==40){
 		var targetPos = new THREE.Vector3(913.6598379748485,1818.7045781726524,-437.03023352186057)
 	 	step1(targetPos)
 
@@ -118,5 +118,5 @@ function updateScript(){
 }
 
 function getSimDataName(){
-	return "3_2.json"
+	return "3_3.json"
 }
